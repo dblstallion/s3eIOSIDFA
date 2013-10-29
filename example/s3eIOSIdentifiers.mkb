@@ -1,12 +1,12 @@
 #!/usr/bin/env mkb
 files
 {
-    s3eIOSIDFA.cpp
+    s3eIOSIdentifiers.cpp
 }
 
 subprojects
 {
-    s3eIOSIDFA
+    s3eIOSIdentifiers
 	iwgx
 }
 #### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
@@ -15,5 +15,5 @@ deployments
 	["Default"]
 	android-manifest='AndroidManifest.xml'
 	app-icf='data/app.icf'
-	caption='s3eIOSIDFA'
+	caption='s3eIOSIdentifiers'
 }

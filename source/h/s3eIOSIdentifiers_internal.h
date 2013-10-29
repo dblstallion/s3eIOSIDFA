@@ -1,5 +1,5 @@
 /*
- * Internal header for the s3eIOSIDFA extension.
+ * Internal header for the s3eIOSIdentifiers extension.
  *
  * This file should be used for any common function definitions etc that need to
  * be shared between the platform-dependent and platform-indepdendent parts of
@@ -12,12 +12,12 @@
  */
 
 
-#ifndef S3EIOSIDFA_INTERNAL_H
-#define S3EIOSIDFA_INTERNAL_H
+#ifndef S3EIOSIDENTIFIERS_INTERNAL_H
+#define S3EIOSIDENTIFIERS_INTERNAL_H
 
 #include "s3eTypes.h"
-#include "s3eIOSIDFA.h"
-#include "s3eIOSIDFA_autodefs.h"
+#include "s3eIOSIdentifiers.h"
+#include "s3eIOSIdentifiers_autodefs.h"
 
 
 /**
@@ -25,26 +25,28 @@
  * accessed by s3eregister.  If this function returns S3E_RESULT_ERROR the
  * extension will be reported as not-existing on the device.
  */
-s3eResult s3eIOSIDFAInit();
+s3eResult s3eIOSIdentifiersInit();
 
 /**
  * Platform-specific initialisation, implemented on each platform
  */
-s3eResult s3eIOSIDFAInit_platform();
+s3eResult s3eIOSIdentifiersInit_platform();
 
 /**
  * Terminate the extension.  This is called once on shutdown, but only if the
  * extension was loader and Init() was successful.
  */
-void s3eIOSIDFATerminate();
+void s3eIOSIdentifiersTerminate();
 
 /**
  * Platform-specific termination, implemented on each platform
  */
-void s3eIOSIDFATerminate_platform();
-s3eBool s3eIOSIDFAIsTrackingEnabled_platform();
+void s3eIOSIdentifiersTerminate_platform();
+s3eBool s3eIOSIdentifiersIsIDFATrackingEnabled_platform();
 
-const char* s3eIOSIDFAGetIDFA_platform();
+const char* s3eIOSIdentifiersGetIDFA_platform();
+
+const char* s3eIOSIdentifiersGetIDFV_platform();
 
 
-#endif /* !S3EIOSIDFA_INTERNAL_H */
+#endif /* !S3EIOSIDENTIFIERS_INTERNAL_H */

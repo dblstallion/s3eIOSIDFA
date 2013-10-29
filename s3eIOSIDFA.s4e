@@ -1,6 +1,0 @@
-include:
-#include <s3eTypes.h>
-
-functions:
-s3eBool s3eIOSIDFAIsTrackingEnabled() S3E_FALSE
-const char* s3eIOSIDFAGetIDFA() NULL

@@ -10,51 +10,52 @@
  * to nothing if this extension is not enabled in the loader
  * at build time.
  */
-#include "s3eIOSIDFA_autodefs.h"
+#include "s3eIOSIdentifiers_autodefs.h"
 #include "s3eEdk.h"
-#include "s3eIOSIDFA.h"
+#include "s3eIOSIdentifiers.h"
 //Declarations of Init and Term functions
-extern s3eResult s3eIOSIDFAInit();
-extern void s3eIOSIDFATerminate();
+extern s3eResult s3eIOSIdentifiersInit();
+extern void s3eIOSIdentifiersTerminate();
 
 
-void s3eIOSIDFARegisterExt()
+void s3eIOSIdentifiersRegisterExt()
 {
     /* fill in the function pointer struct for this extension */
-    void* funcPtrs[2];
-    funcPtrs[0] = (void*)s3eIOSIDFAIsTrackingEnabled;
-    funcPtrs[1] = (void*)s3eIOSIDFAGetIDFA;
+    void* funcPtrs[3];
+    funcPtrs[0] = (void*)s3eIOSIdentifiersIsIDFATrackingEnabled;
+    funcPtrs[1] = (void*)s3eIOSIdentifiersGetIDFA;
+    funcPtrs[2] = (void*)s3eIOSIdentifiersGetIDFV;
 
     /*
      * Flags that specify the extension's use of locking and stackswitching
      */
-    int flags[2] = { 0 };
+    int flags[3] = { 0 };
 
     /*
      * Register the extension
      */
-    s3eEdkRegister("s3eIOSIDFA", funcPtrs, sizeof(funcPtrs), flags, s3eIOSIDFAInit, s3eIOSIDFATerminate, 0);
+    s3eEdkRegister("s3eIOSIdentifiers", funcPtrs, sizeof(funcPtrs), flags, s3eIOSIdentifiersInit, s3eIOSIdentifiersTerminate, 0);
 }
 
 #if !defined S3E_BUILD_S3ELOADER
 
 #if defined S3E_EDK_USE_STATIC_INIT_ARRAY
-int s3eIOSIDFAStaticInit()
+int s3eIOSIdentifiersStaticInit()
 {
     void** p = g_StaticInitArray;
     void* end = p + g_StaticArrayLen;
     while (*p) p++;
     if (p < end)
-        *p = (void*)&s3eIOSIDFARegisterExt;
+        *p = (void*)&s3eIOSIdentifiersRegisterExt;
     return 0;
 }
 
-int g_s3eIOSIDFAVal = s3eIOSIDFAStaticInit();
+int g_s3eIOSIdentifiersVal = s3eIOSIdentifiersStaticInit();
 
 #elif defined S3E_EDK_USE_DLLS
 S3E_EXTERN_C S3E_DLL_EXPORT void RegisterExt()
 {
-    s3eIOSIDFARegisterExt();
+    s3eIOSIdentifiersRegisterExt();
 }
 #endif
 

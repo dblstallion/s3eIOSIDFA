@@ -1,6 +1,6 @@
-# Subproject file for extension s3eIOSIDFA.
+# Subproject file for extension s3eIOSIdentifiers.
 #
-# Include this subproject in your App to enable access to the s3eIOSIDFA API
+# Include this subproject in your App to enable access to the s3eIOSIdentifiers API
 #
 # NOTE: This file was originally written by the extension builder, but will not
 # be overwritten (unless --force is specified) and is intended to be modified.
@@ -9,24 +9,24 @@
 # Running the extension builder with --platform can cause additions to this file
 # even after modification, to support additional platforms
 
-display_name "Extensions/s3eIOSIDFA"
+display_name "Extensions/s3eIOSIdentifiers"
 
 includepath h
 
 files
 {
     (h)
-    s3eIOSIDFA.h
+    s3eIOSIdentifiers.h
 
     ["interface"]
     (interface)
-    s3eIOSIDFA_interface.cpp
-    s3eIOSIDFA.defines.txt
+    s3eIOSIdentifiers_interface.cpp
+    s3eIOSIdentifiers.defines.txt
 }
 
 defines
 {
-    IW_TRACE_CHANNEL_IOSIDFA_VERBOSE=2
+    IW_TRACE_CHANNEL_IOSIDENTIFIERS_VERBOSE=2
 }
 
 if {{ not defined IW_MKF_IWCRT}}
@@ -40,6 +40,6 @@ deployments
     
     iphone-link-opts="-framework AdSupport"
     
-    iphone-link-lib="s3eIOSIDFA"
+    iphone-link-lib="s3eIOSIdentifiers"
     iphone-link-libdir="lib/iphone"
 }
