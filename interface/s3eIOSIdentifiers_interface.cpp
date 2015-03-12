@@ -11,10 +11,12 @@
 #include "s3eIOSIdentifiers.h"
 
 
-// For MIPs (and WP8) platform we do not have asm code for stack switching 
+#ifndef S3E_EXT_SKIP_LOADER_CALL_LOCK
+// For MIPs (and WP8) platform we do not have asm code for stack switching
 // implemented. So we make LoaderCallStart call manually to set GlobalLock
 #if defined __mips || defined S3E_ANDROID_X86 || (defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP))
-#define LOADER_CALL
+#define LOADER_CALL_LOCK
+#endif
 #endif
 
 /**
@@ -48,7 +50,7 @@ static bool _extLoad()
             g_GotExt = true;
         else
             s3eDebugAssertShow(S3E_MESSAGE_CONTINUE_STOP_IGNORE,                 "error loading extension: s3eIOSIdentifiers");
-            
+
         g_TriedExt = true;
         g_TriedNoMsgExt = true;
     }
@@ -84,13 +86,13 @@ s3eBool s3eIOSIdentifiersIsIDFATrackingEnabled()
     if (!_extLoad())
         return S3E_FALSE;
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
 #endif
 
     s3eBool ret = g_Ext.m_s3eIOSIdentifiersIsIDFATrackingEnabled();
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
 #endif
 
@@ -104,13 +106,13 @@ const char* s3eIOSIdentifiersGetIDFA()
     if (!_extLoad())
         return NULL;
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
 #endif
 
     const char* ret = g_Ext.m_s3eIOSIdentifiersGetIDFA();
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
 #endif
 
@@ -124,13 +126,13 @@ const char* s3eIOSIdentifiersGetIDFV()
     if (!_extLoad())
         return NULL;
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallStart(S3E_TRUE, NULL);
 #endif
 
     const char* ret = g_Ext.m_s3eIOSIdentifiersGetIDFV();
 
-#ifdef LOADER_CALL
+#ifdef LOADER_CALL_LOCK
     s3eDeviceLoaderCallDone(S3E_TRUE, NULL);
 #endif
 
