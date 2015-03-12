@@ -11,4 +11,12 @@
 #define S3E_EXT_IOSIDENTIFIERS_NAME "s3eIOSIdentifiers"
 #define S3E_EXT_IOSIDENTIFIERS_HASH 0x9c0bcfb1
 
+#ifdef S3E_EXT_REGISTER
+#ifndef S3E_EXT_REGISTER_KEY
+#define S3E_EXT_REGISTER_KEY(name, num, key) S3E_EXT_REGISTER(name, num)
+#endif
+S3E_EXT_REGISTER("s3eIOSIdentifiers", 3)
+#else
+
+#endif /* S3E_EXT_REGISTER */
 #endif /* !S3EIOSIDENTIFIERS_AUTODEFS_H */
